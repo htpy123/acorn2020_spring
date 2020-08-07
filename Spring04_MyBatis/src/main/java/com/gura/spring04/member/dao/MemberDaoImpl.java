@@ -46,7 +46,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public MemberDto getDate(int num) {
+	public MemberDto getData(int num) {
 		/*
 		 * 	mapper namespacer : member
 		 * 	sql id : getData
@@ -68,6 +68,6 @@ public class MemberDaoImpl implements MemberDao{
 		 * 		이 resultType 이 된다.
 		 */
 		List<MemberDto> list = session.selectList("member.getList");
-		return null;
+		return list;
 	}
 }

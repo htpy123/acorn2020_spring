@@ -9,15 +9,16 @@
 	
 	<update id="update" parameterType="com.gura.spring04.member.dto.MemberDto">
 		UPDATE member
-		SET name=#{name}, addr=#{addr}
+		SET name=#{name},addr=#{addr}
 		WHERE num=#{num}
 	</update>
 	
 	<delete id="delete" parameterType="int">
 		DELETE FROM member
 		WHERE num=#{num}
-<!--    WHERE num=#{sadigjaosidgjsoijdgas} parameter값이 하나라 막 써도 됨-->	
 	</delete>
+<!--    WHERE num=#{sadigjaosidgjsoijdgas} parameter값이 하나라 막 써도 됨-->
+
 	
 	<select id="getData" parameterType="int" resultType="com.gura.spring04.member.dto.MemberDto">
 		SELECT num,name,addr
