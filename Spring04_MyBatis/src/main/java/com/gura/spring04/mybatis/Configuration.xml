@@ -3,10 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+	
+	<typeAliases>
+		<typeAlias type="com.gura.spring04.member.dto.MemberDto" alias="memberDto"/>
+		<typeAlias type="com.gura.spring04.todo.dto.TodoDto" alias="TodoDto"/>
+	</typeAliases>
+	
 	<!-- 사용할 Mapper 목록 설정 -->
 	<mappers>
 		<mapper resource="com/gura/spring04/mybatis/MemberMapper.xml"/>
+		<mapper resource="com/gura/spring04/mybatis/TodoMapper.xml"/>
 	</mappers>
 
 </configuration>
