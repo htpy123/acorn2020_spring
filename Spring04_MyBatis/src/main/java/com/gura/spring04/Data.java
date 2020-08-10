@@ -8,6 +8,7 @@ import com.sun.xml.internal.txw2.annotation.XmlElement;
 public class Data {
 	private int num;
 	private String name;
+	
 	public int getNum() {
 		return num;
 	}

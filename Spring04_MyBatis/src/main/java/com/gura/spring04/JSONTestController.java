@@ -102,4 +102,17 @@ public class JSONTestController {
 		list.add(new MemberDto(2,"해골","행신동"));
 		return list;
 	}
+	
+	@RequestMapping("/xml03")
+	@ResponseBody
+	public HobbyList xml03() {
+		List<String> hobby=new ArrayList<>();
+		hobby.add("java");
+		hobby.add("jsp");
+		hobby.add("spring");
+		
+		HobbyList h = new HobbyList();
+		h.setHobby(hobby);
+		return h;
+	}
 }
