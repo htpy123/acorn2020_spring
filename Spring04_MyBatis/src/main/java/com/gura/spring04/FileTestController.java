@@ -15,7 +15,7 @@ public class FileTestController {
 	//	<input type="file" name="myFile"/> 하나만 전송되는 경우 밑에 myFile과 이름이 같아야 한다.
 	@RequestMapping("/upload")
 	public String upload(@RequestParam MultipartFile myFile,
-			HttpServletRequest request) {
+			HttpServletRequest request, @RequestParam String title) {
 		//원본 파일명
 		String orgFileName=myFile.getOriginalFilename();
 		long fileSize = myFile.getSize();
@@ -42,7 +42,7 @@ public class FileTestController {
 		request.setAttribute("orgFileName", orgFileName);
 		request.setAttribute("saveFileName", saveFileName);
 		request.setAttribute("filesize", fileSize);
-		
+		request.setAttribute("title", title);
 		return "upload";
 	}
 	

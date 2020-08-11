@@ -26,7 +26,8 @@
 	</ul>
 	<button id="testBtn">ajax 테스트(콘솔확인)</button>
 	<form action="upload.do" method="post" enctype="multipart/form-data">
-		<input type="file" name="myFile" />
+		제목<input type="text" name="title"/><br/>
+		첨부파일<input type="file" name="myFile"/><br/>
 		<button type="submit">업로드</button>
 	</form>
 </div>
