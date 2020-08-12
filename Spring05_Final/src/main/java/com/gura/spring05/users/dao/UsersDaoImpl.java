@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gura.spring05.users.dto.UsersDto;
- 
+
 @Repository
 public class UsersDaoImpl implements UsersDao{
 	@Autowired
@@ -38,10 +38,10 @@ public class UsersDaoImpl implements UsersDao{
 		}
 	}
 	
-	//인자로 전달되는 id 에 해당되는 사용자 정보를 리턴하는 메소드
+	//인자로 전달되는 id 에 해당되는 사용자 정보를 리턴하는 메소드 
 	@Override
 	public UsersDto getData(String id) {
-		UsersDto dto = session.selectOne("users.getData", id);
+		UsersDto dto=session.selectOne("users.getData", id);
 		return dto;
 	}
 
@@ -49,13 +49,10 @@ public class UsersDaoImpl implements UsersDao{
 	public void delete(String id) {
 		session.delete("users.delete", id);
 	}
+
+	@Override
+	public void update(UsersDto dto) {
+		session.update("users.update", dto);
+	}
 	
 }
-
-
-
-
-
-
-
-

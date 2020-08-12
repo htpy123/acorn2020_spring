@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.users.dto.UsersDto;
-  
+
 public interface UsersService {
 	public Map<String, Object> isExistId(String inputId);
 	public void addUser(UsersDto dto);
@@ -19,8 +19,5 @@ public interface UsersService {
 	public void deleteUser(HttpSession session);
 	public Map<String, Object> saveProfileImage(HttpServletRequest request,
 			MultipartFile mFile);
+	public void updateUser(HttpSession session, UsersDto dto);
 }
-
-
-
-

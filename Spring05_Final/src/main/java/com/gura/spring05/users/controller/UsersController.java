@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.users.dto.UsersDto;
 import com.gura.spring05.users.service.UsersService;
- 
+
 @Controller
 public class UsersController {
 	@Autowired
@@ -84,23 +83,23 @@ public class UsersController {
 		return "redirect:/home.do";
 	}
 	
-	//개인정보보기 요청 처리
+	//개인정보 보기 요청 처리
 	@RequestMapping("/users/private/info")
 	public ModelAndView info(HttpServletRequest request,ModelAndView mView) {
 		service.getInfo(request.getSession(), mView);
 		mView.setViewName("users/private/info");
 		return mView;
 	}
-	
 	@RequestMapping("/users/private/delete")
-	public ModelAndView delete(HttpServletRequest request, ModelAndView mView) {
+	public ModelAndView delete(HttpServletRequest request,
+			ModelAndView mView) {
 		//서비스를 이용해서 사용자 정보를 삭제하고
 		service.deleteUser(request.getSession());
 		//view 페이지로 forward 이동해서 응답
 		mView.setViewName("users/private/delete");
 		return mView;
-	} 
-	//회원정보 수정폼 요청 처리
+	}
+	//회원정보 수정폼 요청 처리 
 	@RequestMapping("/users/private/updateform")
 	public ModelAndView updateForm(HttpServletRequest request,
 			ModelAndView mView) {
@@ -108,7 +107,7 @@ public class UsersController {
 		mView.setViewName("users/private/updateform");
 		return mView;
 	}
-
+	
 	// ajax 프로필 사진 업로드 요청 처리
 	@RequestMapping("/users/private/profile_upload")
 	@ResponseBody
@@ -120,19 +119,15 @@ public class UsersController {
 		//Map 을 @ResponseBody 로 리턴해준다. 
 		return map;
 	}
+	
+	//개인 정보 수정 반영 요청 처리
+	@RequestMapping("/users/private/update")
+	public ModelAndView update(HttpServletRequest request, 
+			UsersDto dto, ModelAndView mView) {
+		//service 객체를 이용해서 개인정보를 수정한다.
+		service.updateUser(request.getSession(), dto);
+		//개인 정보 보기 페이지로 리다일렉트 이동한다.
+		mView.setViewName("redirect:/users/private/info.do");
+		return mView;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

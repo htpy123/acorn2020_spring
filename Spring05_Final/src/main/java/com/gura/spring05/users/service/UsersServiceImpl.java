@@ -29,7 +29,7 @@ public class UsersServiceImpl implements UsersService{
 		map.put("isExist", isExist);
 		return map;
 	}
- 
+
 	@Override
 	public void addUser(UsersDto dto) {
 		//dao  객체를 이용해서 새로운 사용자 정보를 DB 에 저장하기 
@@ -100,6 +100,16 @@ public class UsersServiceImpl implements UsersService{
 		map.put("imageSrc","/upload/"+saveFileName);
 		
 		return map;
+	} 
+
+	@Override
+	public void updateUser(HttpSession session, UsersDto dto) {
+		//로그인된 아이디를 읽어와서 
+		String id=(String)session.getAttribute("id");
+		//UsersDto 에 담고 
+		dto.setId(id);
+		//dao 를 이용해서 수정반영하기 
+		dao.update(dto);
 	}
 	
 }
