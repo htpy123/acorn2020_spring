@@ -25,7 +25,15 @@
 		<li><a href="xml03.do">xml 응답03</a></li>
 	</ul>
 	<button id="testBtn">ajax 테스트(콘솔확인)</button>
+	
+	<h2>파일 업로드 테스트</h2>
 	<form action="upload.do" method="post" enctype="multipart/form-data">
+		제목<input type="text" name="title"/><br/>
+		첨부파일<input type="file" name="myFile"/><br/>
+		<button type="submit">업로드</button>
+	</form>
+	<h2>파일 업로드 테스트2</h2>
+	<form action="upload2.do" method="post" enctype="multipart/form-data">
 		제목<input type="text" name="title"/><br/>
 		첨부파일<input type="file" name="myFile"/><br/>
 		<button type="submit">업로드</button>
@@ -33,9 +41,9 @@
 </div>
 <script src="resources/js/jquery-3.5.1.js"></script>
 <script>
-	$("#testBtn").on("click",function(){
+	$("#testBtn").on("click", function(){
 		$.ajax({
-			url:"json08.do",
+			url:"json06.do",
 			method:"GET",
 			success:function(data){
 				//data 는 plain object or array 이다.
