@@ -17,7 +17,7 @@
 		FROM users
 		WHERE id=#{id} AND pwd=#{pwd}
 	</select>
-	 
+	
 	<select id="getData" parameterType="string"
 		resultType="usersDto">
 		SELECT id,pwd,email,profile,
@@ -30,6 +30,18 @@
 		DELETE FROM users
 		WHERE id=#{id}
 	</delete>
+	
+	<update id="update" parameterType="usersDto">
+		UPDATE users
+		SET email=#{email},profile=#{profile}
+		WHERE id=#{id}
+	</update>
+	
+	<update id="updatePwd" parameterType="usersDto">
+		UPDATE users
+		SET pwd=#{newPwd}
+		WHERE id=#{id} AND pwd=#{pwd}
+	</update>
 </mapper>
 
 

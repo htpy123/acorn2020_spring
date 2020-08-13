@@ -8,7 +8,7 @@
 		<typeAlias type="com.gura.spring05.users.dto.UsersDto" 
 			alias="usersDto"/>
 	</typeAliases>
-		
+	
 	<!-- Mapper 등록 -->
 	<mappers>
 		<mapper resource="com/gura/spring05/mybatis/UsersMapper.xml"/>
