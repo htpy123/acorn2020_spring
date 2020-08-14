@@ -5,9 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/error/404.jsp</title>
+<title>/views/cafe/insert.jsp</title>
 </head>
 <body>
-	<p>해당 페이지는 존재 하지 않습니다.</p>
+<script>
+	alert("${id} 님이 작성한 글을 저장했습니다.");
+	location.href="${pageContext.request.contextPath }/cafe/list.do";
+</script>
 </body>
 </html>
+
+
+
