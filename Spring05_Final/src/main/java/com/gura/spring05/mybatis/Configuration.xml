@@ -9,12 +9,15 @@
 			alias="usersDto"/>
 		<typeAlias type="com.gura.spring05.file.dto.FileDto"
 			alias="fileDto"/>
+			<typeAlias type="com.gura.spring05.cafe.dto.CafeDto"
+			alias="cafeDto"/>
 	</typeAliases>
 	
 	<!-- Mapper 등록 -->
 	<mappers>
 		<mapper resource="com/gura/spring05/mybatis/UsersMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/FileMapper.xml"/>
+		<mapper resource="com/gura/spring05/mybatis/CafeMapper.xml"/>
 	</mappers>
 	
 </configuration>
