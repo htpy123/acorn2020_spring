@@ -177,7 +177,7 @@
 										@<i>${tmp.target_id }</i>
 									</c:if>
 									<span>${tmp.regdate }</span>
-									<a href="javascript:" class="reply-link">답글</a>
+									<a data-num="${tmp.num }" href="javascript:" class="reply-link">답글</a>
 									<c:if test="${tmp.writer eq id }">
 										| <a data-num="${tmp.num }" href="javascript:" class="comment-update-link">수정</a>
 										| <a data-num="${tmp.num }" href="javascript:" class="comment-delete-link">삭제</a>
@@ -255,6 +255,7 @@
 			"/cafe/private/comment_delete.do?num="+num+"&ref_group=${dto.num}";
 		}
 	});
+
 	//답글 달기 링크를 클릭했을때 실행할 함수 등록
 	$(".reply-link").on("click", function(){
 		//로그인 여부
@@ -265,14 +266,18 @@
 					"url=${pageContext.request.contextPath }/cafe/detail.do?num=${dto.num}";
 		}
 		
-		$(this).parent().parent().parent().find(".re-insert-form")
+		var selector="#comment"+$(this).attr("data-num");
+		$(selector)
+		.find(".re-insert-form")
 		.slideToggle();
+		
 		if($(this).text()=="답글"){//링크 text를 답글일때 클릭하면 
 			$(this).text("취소");//취소로 바꾸고 
 		}else{//취소일때 크릭하면 
 			$(this).text("답글");//답들로 바꾼다.
 		}	
 	});
+
 	$(".insert-form").on("submit", function(){
 		//로그인 여부
 		var isLogin=${not empty id};
@@ -283,6 +288,8 @@
 			return false; //폼 전송 막기 		
 		}
 	});
+
+
 	function deleteConfirm(){
 		var isDelete=confirm("이 글을 삭제 하시겠습니까?");
 		if(isDelete){
@@ -292,3 +299,8 @@
 </script>
 </body>
 </html>
+
+
+
+
+
