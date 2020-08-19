@@ -4,13 +4,13 @@ public class CafeCommentDto {
 	private int num;
 	private String writer;
 	private String content;
-	private String target_id;	//댓글 대상자의 아이디를 저장할 필드
-	private int ref_group;	//원글의 글번호를 저장할 필드
-	private int comment_group;	//댓글내에서의 그룹번호
-	private String deleted;	//삭제된 댓글인지 여부를 저장할 필드 "yes or no"
+	private String target_id; //댓글 대상자의 아이디를 저장할 필드
+	private int ref_group; //원글의 글번호를 저장할 필드
+	private int comment_group; //댓글내에서의 그룹번호 
+	private String deleted; //삭제된 댓글인지 여부를 저장할 필드   "yes" or "no"
 	private String regdate;
-	private String profile;	//프로필 이미지 경로를 저장할 피드
-	//디폴트 생성자
+	private String profile; //프로필 이미지 경로를 저장할 필드 
+	//디폴트 생성자 
 	public CafeCommentDto() {}
 	public CafeCommentDto(int num, String writer, String content, String target_id, int ref_group, int comment_group,
 			String deleted, String regdate, String profile) {
@@ -79,4 +79,10 @@ public class CafeCommentDto {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+	
+	
 }
+
+
+
+

@@ -10,12 +10,13 @@ import com.gura.spring05.cafe.dto.CafeCommentDto;
 
 @Repository
 public class CafeCommentDaoImpl implements CafeCommentDao{
-
+	
 	@Autowired
 	private SqlSession session;
 	
 	@Override
 	public List<CafeCommentDto> getList(int ref_group) {
+		
 		return session.selectList("cafeComment.getList", ref_group);
 	}
 
@@ -31,12 +32,24 @@ public class CafeCommentDaoImpl implements CafeCommentDao{
 
 	@Override
 	public int getSequence() {
+		
 		return session.selectOne("cafeComment.getSequence");
 	}
 
 	@Override
 	public void update(CafeCommentDto dto) {
-		session.update("cafeCommnet.update", dto);
+		session.update("cafeComment.update", dto);
 	}
-	
+
+	@Override
+	public CafeCommentDto getData(int num) {
+		
+		return session.selectOne("cafeComment.getData", num);
+	}
+
 }
+
+
+
+
+

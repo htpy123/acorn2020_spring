@@ -1,5 +1,8 @@
 package com.gura.spring05.cafe.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.cafe.dto.CafeCommentDto;
 import com.gura.spring05.cafe.dto.CafeDto;
 import com.gura.spring05.cafe.service.CafeService;
 
@@ -50,17 +55,58 @@ public class CafeController {
 		mView.setViewName("cafe/insert");
 		return mView;
 	}
-	@RequestMapping(value="/cafe/private/comment_insert",
+	
+	@RequestMapping("/cafe/private/updateform")
+	public ModelAndView updateform(HttpServletRequest request,
+			ModelAndView mView) {
+		cafeService.getDetail(request);
+		mView.setViewName("cafe/updateform");
+		return mView;
+	}
+	@RequestMapping(value="/cafe/private/update", method=RequestMethod.POST)
+	public ModelAndView update(CafeDto dto, ModelAndView mView) {
+		cafeService.updateContent(dto);
+		mView.setViewName("cafe/update");
+		return mView;
+	}
+	@RequestMapping("/cafe/private/delete")
+	public ModelAndView delete(int num, HttpServletRequest request,
+			ModelAndView mView) {
+		cafeService.deleteContent(num, request);
+		mView.setViewName("redirect:/cafe/list.do");
+		return mView;
+	}
+	@RequestMapping(value = "/cafe/private/comment_insert", 
 			method=RequestMethod.POST)
 	public ModelAndView commentInsert(HttpServletRequest request,
-			ModelAndView mView,@RequestParam int ref_group) {
-		//새 댓글을 저장하고
+			ModelAndView mView, @RequestParam int ref_group) {
+		//새 댓글을 저장하고 
 		cafeService.saveComment(request);
-		//보고 있던 글 자세히 보기로 다시 리다일렉트 이동 시킨다
+		//보고 있던 글 자세히 보기로 다시 리다일렉트 이동 시킨다.
 		mView.setViewName("redirect:/cafe/detail.do?num="+ref_group);
 		return mView;
 	}
-		
+	@RequestMapping("/cafe/private/comment_delete")
+	public ModelAndView commentDelete(HttpServletRequest request,
+			ModelAndView mView, @RequestParam int ref_group) {
+		cafeService.deleteComment(request);
+		mView.setViewName("redirect:/cafe/detail.do?num="+ref_group);
+		return mView;
+	}
+	
+	//댓글 수정 ajax 요청에 대한 요청 처리 
+	@RequestMapping(value = "/cafe/private/comment_update", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> commentUpdate(CafeCommentDto dto){
+		//댓글을 수정 반영하고 
+		cafeService.updateComment(dto);
+		//JSON 문자열을 클라이언트에게 응답한다.
+		Map<String, Object> map=new HashMap<>();
+		map.put("num", dto.getNum());
+		map.put("content", dto.getContent());
+		return map;
+	}
 }
 
 
