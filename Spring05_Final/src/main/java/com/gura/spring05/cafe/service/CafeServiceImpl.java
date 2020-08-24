@@ -144,7 +144,6 @@ public class CafeServiceImpl implements CafeService{
 		final int PAGE_ROW_COUNT=5;
 		final int PAGE_DISPLAY_COUNT=5;
 		
-		
 		//전체 row 의 갯수를 읽어온다.
 		//자세히 보여줄 글의 번호가 ref_group  번호 이다. 
 		int totalRow=cafeCommentDao.getCount(num);
@@ -154,11 +153,11 @@ public class CafeServiceImpl implements CafeService{
 		//전체 페이지의 갯수 구하기
 		int totalPageCount=
 						(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
-		//일단 마지막 페이지의 댓글 목록을 보여주기로 하고
+		//일단 마지막 페이지의 댓글 목록을 보여주기로 하고 
 		int pageNum=totalPageCount;
 		//만일 페이지 번호가 넘어온다면
 		if(strPageNum!=null) {
-			//넘어온 페이지에 해당하는 댓글 목록을 보여주도록 한다.
+			//넘어온 페이지에 해당하는 댓글 목록을 보여주도록 한다. 
 			pageNum=Integer.parseInt(strPageNum);
 		}
 		//보여줄 페이지 데이터의 시작 ResultSet row 번호
@@ -207,14 +206,7 @@ public class CafeServiceImpl implements CafeService{
 
 	@Override
 	public void deleteContent(int num, HttpServletRequest request) {
-		//1. 삭제할 글의 정보를 읽어온다.
-		CafeDto dto=cafeDao.getData(num);
-		//2. 본인이 작성한 글이 아닌경우 에러 처리를한다 (예외를 발생시킨다)
-		String id=(String)request.getSession().getAttribute("id");
-		//만일 로그인된 아이디와 글 작성자가 다르면
-		if(!id.equals(dto.getWriter())) {
-			throw new NotDeleteException("남의 글 지우기 없기!");
-		}		// TODO Auto-generated method stub
+		
 		cafeDao.delete(num);
 	}
 
