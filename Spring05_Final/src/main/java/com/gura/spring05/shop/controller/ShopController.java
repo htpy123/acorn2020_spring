@@ -21,6 +21,7 @@ public class ShopController {
 		return mView;
 	}
 	
+	
 	@RequestMapping("/shop/private/buy")
 	public ModelAndView buy(HttpServletRequest request,
 			ModelAndView mView) {

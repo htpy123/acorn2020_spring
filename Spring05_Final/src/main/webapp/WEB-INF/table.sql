@@ -88,16 +88,34 @@ CREATE SEQUENCE client_order_seq;
 
 -- sample 데이터
 INSERT INTO shop (num,name,price,remainCount)
-VALUES(1, '사과', 1000, 5);
+VALUES(1, '사과', 1000, 435);
 
 INSERT INTO shop (num,name,price,remainCount)
-VALUES(2, '바나나', 2000, 5);
+VALUES(2, '바나나', 2000, 565);
 
 INSERT INTO shop (num,name,price,remainCount)
-VALUES(3, '귤', 3000, 5);
+VALUES(3, '귤', 3000, 275);
 
 INSERT INTO client_account (id, money, point)
-VALUES('superman', 10000, 0);
+VALUES('superman', 1000000, 0);
 
 INSERT INTO client_account (id, money, point)
-VALUES('batman', 10000, 0);
+VALUES('batman', 1000000, 0);
+
+
+-- 혼자 해보기
+CREATE TABLE pointshop(
+	num NUMBER PRIMARY KEY, --상품번호
+	name VARCHAR2(30), --상품이름
+	price NUMBER, --상품가격
+	remainCount NUMBER CHECK(remainCount >= 0) --재고갯수 
+);
+
+INSERT INTO shop (num,name,price,remainCount)
+VALUES(1, '사탕', 100, 156);
+
+INSERT INTO shop (num,name,price,remainCount)
+VALUES(2, '껌', 200, 207);
+
+INSERT INTO shop (num,name,price,remainCount)
+VALUES(3, '빼빼로', 300, 147);

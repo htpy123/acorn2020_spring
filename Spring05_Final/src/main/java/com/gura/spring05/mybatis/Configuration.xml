@@ -16,7 +16,9 @@
 		<typeAlias type="com.gura.spring05.shop.dto.ShopDto"
 			alias="shopDto"/>
 		<typeAlias type="com.gura.spring05.shop.dto.OrderDto"
-			alias="orderDto"/>		
+			alias="orderDto"/>	
+		<typeAlias type="com.gura.spring05.shop.dto.PointShopDto"
+			alias="pointShopDto"/>	
 	</typeAliases>
 	
 	<!-- Mapper 등록 -->
@@ -26,6 +28,7 @@
 		<mapper resource="com/gura/spring05/mybatis/CafeMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/CafeCommentMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/ShopMapper.xml"/>
+		<mapper resource="com/gura/spring05/mybatis/PointShopMapper.xml"></mapper>
 	</mappers>
 	
 </configuration>
