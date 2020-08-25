@@ -4,7 +4,7 @@
 	<select id="getList" resultType="shopDto">
 		SELECT num,name,price,remainCount
 		FROM shop
-		ORDER BY num ASC;
+		ORDER BY num ASC
 	</select>
 	<update id="minusCount" parameterType="int">
 		UPDATE shop
