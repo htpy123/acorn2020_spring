@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/angularjs/test04.jsp</title>
+<title>/angularjs/test05.jsp</title>
 <!-- bootstrap css 로딩 시키기 -->
 <link href="../resources/css/bootstrap.css" rel="stylesheet"/>
 <!-- angularjs 로딩 시키기 -->
@@ -17,10 +17,14 @@
 	<h1>form 검증</h1>
 	<!-- novalidate -->
 	<form name="myForm" action="insert.jsp" method="post" novalidate>
-		<!-- 입력한 문자열을 id 라는 모델명으로 관리, 반드시 입력해야 한다. -->
-		<input type="text" name="id" ng-model="id" ng-required="true"/>
-		<p ng-show="myForm.id.$invalid && myForm.id.$dirty" style="color:red;">아이디는 반드시 입력 해라!</p>
-		<p ng-hide="myForm.id.$valid || myForm.id.$pristine" style="color:red;">아이디는 반드시 입력 해라!</p>
+		<div class="form-group">
+			<label for="id">아이디</label>
+			<input ng-model="id" ng-required="true" 
+				type="text" name="id" id="id" class="form-control"
+				ng-class="{'is-invalid':myForm.id.$invalid && myForm.id.$dirty, 'is-valid':myForm.id.$valid}"/>
+			<div class="invalid-feedback">아이디는 반드시 입력하세요</div>
+			<div class="valid-feedback">아이디를 제대로 입력 했습니다</div>
+		</div>
 		<button type="submit" ng-disabled="myForm.id.$invalid">제출</button>	
 	</form>
 	<p> 입력한 아이디 : <strong>{{id}}</strong></p>
