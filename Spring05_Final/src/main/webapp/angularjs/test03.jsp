@@ -13,7 +13,16 @@
 </head>
 <!-- body 에서 일어나는 일은 angular 로 관리를 하겠다라는 의미 -->
 <body ng-app>
+<%
+	request.setAttribute("myName", "김구라");
+	String[] friends={"cat","dog","elephant"};
+	request.setAttribute("friends", friends);
+%>
 <div class="container">
+	<p>내이름은 ${myName }</p>
+	<c:forEach var="tmp" items = "${friends }">
+		<p>${tmp }</p>	
+	</c:forEach>
 	<h1 ng-init="a='btn-primary'">클래스 속성 조작하기</h1>
 	<input type="text" ng-model="b"/><br/>
 	<button class="btn btn-primary">버튼1</button>
