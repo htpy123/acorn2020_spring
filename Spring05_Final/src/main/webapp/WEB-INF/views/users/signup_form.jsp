@@ -23,7 +23,8 @@
 			.success(function(data){
 				//data => {isExist:true} or {isExist:false} 인 object 이다.
 				//입력한 아이디가 DB 에 존재 하지 않아야지 사용할수 있다.
-				$scope.canUseId=!data.isExist;
+				$scope.myForm.id.$valid = $scope.myForm.id.$valid && !data.isExist;
+				$scope.myFomr.id.$invalid = $scope.myForm.id.$invalid || data.isExis;
 			});
 		};
 		//비밀번호 입력란을 입력했을때 호출되는 함수 
@@ -57,7 +58,7 @@
 				ng-required="true"
 				ng-minlength="5"
 				ng-maxlength="10"
-				ng-class="{'is-invalid': (myForm.pwd.$invalid || !isPwdEqual ) && myForm.pwd.$dirty , 'is-valid': myForm.pwd.$valid && isPwdEqual }"
+				ng-class="{'is-invalid':(myForm.pwd.$invalid && myForm.pwd.$dirty , 'is-valid': myForm.pwd.$valid && isPwdEqual }"
 				ng-change="pwdChanged()"/>
 			<small class="form-text text-muted">최소 5글자~10글자 이내로 입력 하세요.</small>
 			<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
