@@ -24,7 +24,7 @@
 		<button type="submit" ng-disabled="myForm.id.$invalid">제출</button>	
 	</form>
 	<p> 입력한 아이디 : <strong>{{id}}</strong></p>
-	<p> 아이디 유효한지 여부 : <strong>{{myForm.id.$valid}}</strong></p>
+	<p> 아이디 유효한지 여부 : <strong>{{myForm.id.$valid}}</strong></p>	
 	<p> 아이디 유효하지 않은지 여부 : <strong>{{myForm.id.$invalid}}</strong></p>
 	<p> 아이디가 청결(순결) 한지 여부 : <strong>{{myForm.id.$pristine}}</strong></p>
 	<p> 아이디가 더럽혀졌는지 여부 : <strong>{{myForm.id.$dirty}}</strong></p>
