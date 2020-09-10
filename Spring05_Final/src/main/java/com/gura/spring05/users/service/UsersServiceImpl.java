@@ -35,10 +35,10 @@ public class UsersServiceImpl implements UsersService{
 	@Override
 	public void addUser(UsersDto dto) {
 		//dto 객체에 비밀번호를 암호화 해서 넣어준다.
-		String inputPwd = dto.getPwd();	//회원가입 form 에 입력한 비밀번호
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String encodedPwd = encoder.encode(inputPwd); //암호화된 비밀번호
-		//암호화된 비밀번호를 dto 객체에 다시 넣어준다.
+		String inputPwd=dto.getPwd(); //회원가입 form 에 입력한 비밀번호
+		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+		String encodedPwd=encoder.encode(inputPwd); //암호화된 비밀번호
+		//암호화된 비밀번호를 dto 객체에 다시 넣어준다. 
 		dto.setPwd(encodedPwd);
 		
 		//dao  객체를 이용해서 새로운 사용자 정보를 DB 에 저장하기 
@@ -48,17 +48,17 @@ public class UsersServiceImpl implements UsersService{
 	@Override
 	public void loginProcess(UsersDto dto, ModelAndView mView, 
 			HttpSession session) {
-		//입혁한 정보가 유효한 정보인지 여부를 저장할 지역변수
-		boolean isValid=false; // 초기값 false
+		//입력한 정보가 유효한 정보인지 여부를 저장할 지역변수 
+		boolean isValid=false; //초기값 false
 		//로그인폼에 입력한 아이디를 이용해서 DB 에서 select 해본다.
-		//존재하지 않는 아이디면 null 이 리턴된다.
-		UsersDto resultDto = dao.getData(dto.getId());
-		if(resultDto !=null) {	//아이디는 존재하는경우(아이디는 일치)
-			//DB에 저장된 암호화된 비밀번호
-			String encodedPwd = resultDto.getPwd();
-			//로그인폼에 입력한 비밀번호
-			String inputPwd = dto.getPwd();
-			//BCrypt 클래스의 static 메소드를 이용해서 일치여부를 얻어낸다.
+		//존재하지 않는 아이디면 null 이 리턴된다. 
+		UsersDto resultDto=dao.getData(dto.getId());
+		if(resultDto != null) {//아이디는 존재하는경우(아이디는 일치)
+			//DB 에 저장된 암호화된 비밀번호 
+			String encodedPwd=resultDto.getPwd();
+			//로그인폼에 입력한 비밀번호 
+			String inputPwd=dto.getPwd();
+			//BCrypt 클래스의 static 메소드를 이용해서 일치 여부를 얻어낸다. 
 			isValid=BCrypt.checkpw(inputPwd, encodedPwd);
 		}
 		
@@ -131,27 +131,27 @@ public class UsersServiceImpl implements UsersService{
 		//dao 를 이용해서 수정반영하기 
 		dao.update(dto);
 	}
-
+	
 	@Override
 	public void updateUserPwd(HttpSession session, UsersDto dto, ModelAndView mView) {
 		String id=(String)session.getAttribute("id");
-		//세션 영역에 저장된 아이디를 dto 에 넣어준다.
+		//세션 역역에 저장된 아이디를 dto 에 넣어준다. 
 		dto.setId(id);
-		//작업 성공여부
+		//작업 성공여부 
 		boolean isSuccess=false;
-		//1. 기본 비밀번호와 암호화된 비밀번호가 일치하는지 확인
-		UsersDto resultDto=dao.getData(id);	//null일 가능성은 없다
-		//DB 에 저장된 암호화된 비밀번호
+		//1. 기존 비밀번호와 암호화된 비밀번호가 일치하는지 확인
+		UsersDto resultDto=dao.getData(id); //null 일 가능성은 없다.
+		//DB 에 저장된 암호화된 비밀번호 
 		String encodedPwd=resultDto.getPwd();
-		//로그인폼에 입력한 비밀번호
+		//로그인폼에 입력한 비밀번호 
 		String inputPwd=dto.getPwd();
-		//BCrypt 클래스의 static 메소드를 이용해서 일치 여부를 얻어낸다
-		boolean isValid = BCrypt.checkpw(inputPwd, encodedPwd);
+		//BCrypt 클래스의 static 메소드를 이용해서 일치 여부를 얻어낸다. 
+		boolean isValid=BCrypt.checkpw(inputPwd, encodedPwd);
 		//2. 만일 일치한다면 새로운 비밀번호를 암호화 해서 저장한다.
 		if(isValid) {
 			//새로운 비밀번호를 암호화 한다.
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			String encodedNewPwd = encoder.encode(dto.getNewPwd());
+			BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+			String encodedNewPwd=encoder.encode(dto.getNewPwd());
 			//암호화된 새 비밀번호를 dto 에 다시 넣어준다.
 			dto.setNewPwd(encodedNewPwd);
 			//dao 를 이용해서 DB 에 반영한다.
@@ -163,12 +163,32 @@ public class UsersServiceImpl implements UsersService{
 		//mView 객체에 성공 여부를 담는다.
 		mView.addObject("isSuccess", isSuccess);
 	}
+
+	@Override
+	public Map<String, Object> ajaxLoginProcess(UsersDto dto, HttpSession session) {
+		//입력한 정보가 유효한 정보인지 여부를 저장할 지역변수 
+		boolean isValid=false; //초기값 false
+		//로그인폼에 입력한 아이디를 이용해서 DB 에서 select 해본다.
+		//존재하지 않는 아이디면 null 이 리턴된다. 
+		UsersDto resultDto=dao.getData(dto.getId());
+		if(resultDto != null) {//아이디는 존재하는경우(아이디는 일치)
+			//DB 에 저장된 암호화된 비밀번호 
+			String encodedPwd=resultDto.getPwd();
+			//로그인폼에 입력한 비밀번호 
+			String inputPwd=dto.getPwd();
+			//BCrypt 클래스의 static 메소드를 이용해서 일치 여부를 얻어낸다. 
+			isValid=BCrypt.checkpw(inputPwd, encodedPwd);
+		}
+		Map<String, Object> map=new HashMap<>();
+		if(isValid) {//만일 유효한 정보이면 
+			//로그인 처리를 한다. 
+			session.setAttribute("id", dto.getId());
+			map.put("isSuccess", true);
+			map.put("id", dto.getId());
+		}else {//아니면 
+			map.put("isSuccess", false);
+		}
+		return map;
+	}
 	
 }
-
-
-
-
-
-
-

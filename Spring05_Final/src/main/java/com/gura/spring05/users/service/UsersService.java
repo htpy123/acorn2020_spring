@@ -22,12 +22,5 @@ public interface UsersService {
 	public void updateUser(HttpSession session, UsersDto dto);
 	public void updateUserPwd(HttpSession session, UsersDto dto,
 			ModelAndView mView);
+	public Map<String, Object> ajaxLoginProcess(UsersDto dto, HttpSession session);
 }
-
-
-
-
-
-
-
-
